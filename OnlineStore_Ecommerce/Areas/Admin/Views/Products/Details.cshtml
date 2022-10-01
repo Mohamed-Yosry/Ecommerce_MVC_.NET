@@ -1,0 +1,75 @@
+﻿@using OnlineStore_Ecommerce.Models;
+@model Products
+
+@{
+    ViewData["Title"] = "Details";
+}
+<br />
+<h2 class="text-info">Product's Details</h2>
+<form asp-action="Details">
+    <div class="p-4 rounded border">
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Name" class="form-control" readonly="readonly" />
+            </div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Price"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Price" class="form-control" readonly="readonly" />
+            </div>
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="ProductColor"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="ProductColor" class="form-control" readonly="readonly" />
+            </div>
+            <span asp-validation-for="ProductColor" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="ProductTypeId"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="ProductTypeId" class="form-control" readonly="readonly" />
+            </div>
+            <span asp-validation-for="ProductTypeId" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="SpecialTagId"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="SpecialTagId" class="form-control" readonly="readonly" />
+            </div>
+            <span asp-validation-for="SpecialTagId" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="IsAvailable"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="IsAvailable" class="" type="checkbox" readonly="readonly" />
+            </div>
+            <span asp-validation-for="IsAvailable" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+            <input type="submit" class="btn btn-success" value="Back to list" />
+        </div>
+        <div class="col-3">
+            <img src="~/@Model.Image" width="100%" />
+        </div>
+    </div>
+</form>

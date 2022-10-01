@@ -1,0 +1,75 @@
+﻿@using OnlineStore_Ecommerce.Models;
+@model Products
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    List<Products> products = HttpContextAccessor.HttpContext.Session.Get<List<Products>>("products");
+    Products product = null;
+    if (products != null)
+        product = products.FirstOrDefault(c => c.Id == Model.Id);
+}
+@{
+    ViewData["Title"] = "Details";
+}
+<br />
+<h2 class="text-info">Product's Details</h2>
+<form asp-action="Details">
+    <div class="p-4 rounded border">
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Name" class="form-control" readonly="readonly" />
+            </div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Price"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Price" class="form-control" readonly="readonly" />
+            </div>
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="ProductColor"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="ProductColor" class="form-control" readonly="readonly" />
+            </div>
+            <span asp-validation-for="ProductColor" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="ProductTypeId"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="ProductTypeId" class="form-control" readonly="readonly" />
+            </div>
+            <span asp-validation-for="ProductTypeId" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+            </div>
+            <div class="col-8">
+                @if(product!=null){
+                    <input asp-action="Remove"  asp-route-id="@Model.Id" class="btn btn-danger" type="submit" value="Remove From Chart" />
+                }else{
+                    <input class="btn btn-info" type="submit" value="Add to chart" />
+                }
+                
+            </div>
+        </div>
+        <div class="form-group">
+            <a asp-action="Index" asp-controller="Home" class="btn btn-success">Back</a>
+        </div>
+        <div class="col-3">
+            <img src="~/@Model.Image" width="100%" />
+        </div>
+    </div>
+</form>

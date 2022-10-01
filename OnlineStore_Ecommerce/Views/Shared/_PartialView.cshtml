@@ -1,0 +1,8 @@
+﻿@model string
+<td style="width:150px">
+    <div class="btn-group">
+        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model">Edit</a>
+        <a asp-action="Locout" class="btn btn-danger" asp-route-id="@Model">Locout</a>
+        <a asp-action="Detatils" class="btn btn-success" asp-route-id="@Model">Details</a>
+    </div>
+</td>

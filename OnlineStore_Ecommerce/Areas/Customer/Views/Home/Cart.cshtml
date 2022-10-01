@@ -1,0 +1,47 @@
+﻿@model List<Products>
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h1>Cart</h1>
+<br />
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Product Type</th>
+                <th>color</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var product in Model){
+                <tr>
+                    <td>
+                        <img src="~/@product.Image" width="200px" height="150px">
+                    </td>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>@product.ProductType.ProductType</td>
+                    <td>@product.ProductColor</td>
+                    <td>
+                        <a asp-action="Remove" asp-route-id="@product.Id" class="btn btn-danger">Remove</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-6">
+        <a asp-action="Index" class="btn btn-success">Remove</a>
+    </div>
+    <div class="col-6 text-right">
+        <h4>Total Price</h4>
+        <h4>@Model.Sum(c=>c.Price)</h4>
+        <a asp-area="Customer" asp-action="Checkout" asp-controller="Order" class="btn btn-primary">Checkout</a>
+    </div>
+</div>

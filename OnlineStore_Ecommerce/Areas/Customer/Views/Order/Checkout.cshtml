@@ -1,0 +1,90 @@
+﻿@model OnlineStore_Ecommerce.Models.Order;
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    List<Products> products = HttpContextAccessor.HttpContext.Session.Get<List<Products>>("products");
+    if (products == null)
+        products = new List<Products>();
+    ViewData["Title"] = "Order Details";
+}
+<br />
+<h2 class="text-info">Order's Details</h2>
+<form asp-action="Checkout">
+    <div class="p-4 rounded border">
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Name" class="form-control"   />
+            </div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Address"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Address" class="form-control"   />
+            </div>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Email"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Email" class="form-control"   />
+            </div>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="PhoneNo"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="PhoneNo" class="form-control"   />
+            </div>
+            <span asp-validation-for="PhoneNo" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="OrderDate"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="OrderDate" class="form-control" />
+            </div>
+            <span asp-validation-for="OrderDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            
+        </div>
+        <div class="col-6">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var product in products){
+                        <td>
+                            <img src="~/@product.Image" height="100px" width="150px">
+                        </td>
+                        <td>@product.Name</td>
+                        <td>@product.Price</td>
+                    }
+                </tbody>
+            </table>
+            <div class="col-6 text-right">
+                <h4>Total Price</h4>
+                <h4>@products.Sum(c=>c.Price)</h4>
+                <input type="submit" value="Place Order" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+</form>
